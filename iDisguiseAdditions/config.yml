@@ -1,0 +1,21 @@
+disable:
+   
+   # Disable disguised players from picking up items
+   item-pick-up: false
+   
+   # Disable disguised players from getting damaged by mobs (including projectiles and other non-living mobs)
+   mob-damage: false
+   
+   # Disable disguised players from getting targetted by monsters
+   mob-target: false
+   
+undisguise:
+   
+   # Undisguise disguised players when they do PvP
+   pvp: false
+   
+   # Undisguise disguised players when they do PvE (this means all damage between a player and another mob)
+   pve: false
+   
+   # Undisguise disguised players when they are hit by a projectile (e.g. arrow, snowball etc.)
+   projectile: false

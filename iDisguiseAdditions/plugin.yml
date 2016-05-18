@@ -1,0 +1,12 @@
+name: iDisguiseAdditions
+main: de.robingrether.idisguise.additions.Additions
+version: 1.0
+author: RobinGrether
+depend: [iDisguise]
+website: http://dev.bukkit.org/bukkit-plugins/idisguise-additions/
+commands:
+   idisguiseadditions:
+      description: Reload the config file.
+permissions:
+   iDisguiseAdditions.reload:
+      default: op
