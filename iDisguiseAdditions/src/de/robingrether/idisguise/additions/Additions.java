@@ -22,6 +22,7 @@ public class Additions extends JavaPlugin {
 		listener = new EventListener(this);
 		configuration = new Configuration(this);
 		configuration.loadData();
+		configuration.saveData();
 		try {
 			metrics = new Metrics(this);
 			metrics.start();

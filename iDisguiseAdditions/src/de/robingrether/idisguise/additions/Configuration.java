@@ -1,10 +1,14 @@
 package de.robingrether.idisguise.additions;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.util.logging.Level;
 
 import org.bukkit.configuration.file.FileConfiguration;
+
+import de.robingrether.util.StringUtil;
 
 public class Configuration {
 	
@@ -29,10 +33,6 @@ public class Configuration {
 	}
 	
 	public void loadData() {
-		File configurationFile = new File(plugin.getDataFolder(), "config.yml");
-		if(!configurationFile.exists()) {
-			plugin.saveDefaultConfig();
-		}
 		plugin.reloadConfig();
 		FileConfiguration fileConfiguration = plugin.getConfig();
 		try {
@@ -52,17 +52,18 @@ public class Configuration {
 	}
 	
 	public void saveData() {
-		FileConfiguration fileConfiguration = plugin.getConfig();
+		File configurationFile = new File(plugin.getDataFolder(), "config.yml");
+		String config = StringUtil.readFrom(plugin.getResource("config.yml"));
 		try {
 			for(Field pathField : getClass().getDeclaredFields()) {
 				if(pathField.getName().endsWith("_PATH")) {
 					Field valueField = getClass().getDeclaredField(pathField.getName().substring(0, pathField.getName().length() - 5));
-					if(valueField.getType() == boolean.class) {
-						fileConfiguration.set((String)pathField.get(null), valueField.getBoolean(this));
-					}
+					config = config.replace(valueField.getName(), valueField.get(this).toString());
 				}
 			}
-			plugin.saveConfig();
+			OutputStream output = new FileOutputStream(configurationFile);
+			output.write(config.getBytes());
+			output.close();
 		} catch(Exception e) {
 			plugin.getLogger().log(Level.SEVERE, "An error occured while saving the config file.", e);
 		}
