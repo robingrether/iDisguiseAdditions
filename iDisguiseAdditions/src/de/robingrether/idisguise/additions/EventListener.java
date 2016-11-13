@@ -8,6 +8,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
 import de.robingrether.idisguise.api.DisguiseEvent;
@@ -91,6 +92,13 @@ public class EventListener implements Listener {
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onUndisguise(UndisguiseEvent event) {	
 		if(plugin.getConfiguration().MODIFY_DISPLAY_NAME && event.getDisguise() instanceof PlayerDisguise) {
+			event.getPlayer().setDisplayName(event.getPlayer().getName());
+		}
+	}
+	
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void onPlayerJoin(PlayerJoinEvent event) {
+		if(plugin.getConfiguration().MODIFY_DISPLAY_NAME && DisguiseManager.getInstance().getDisguise(event.getPlayer()) instanceof PlayerDisguise) {
 			event.getPlayer().setDisplayName(event.getPlayer().getName());
 		}
 	}
