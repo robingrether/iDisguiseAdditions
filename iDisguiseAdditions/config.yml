@@ -9,6 +9,11 @@ disable:
    # Disable disguised players from getting targeted by monsters
    mob-target: DISABLE_MOB_TARGET
    
+modify:
+   
+   # Modify players' display names who are disguised as other players
+   display-name: MODIFY_DISPLAY_NAME
+   
 undisguise:
    
    # Undisguise disguised players when they do PvP

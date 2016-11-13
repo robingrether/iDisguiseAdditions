@@ -15,6 +15,7 @@ public class Configuration {
 	public static final String DISABLE_ITEM_PICK_UP_PATH = "disable.item-pick-up";
 	public static final String DISABLE_MOB_DAMAGE_PATH = "disable.mob-damage";
 	public static final String DISABLE_MOB_TARGET_PATH = "disable.mob-target";
+	public static final String MODIFY_DISPLAY_NAME_PATH = "modify.display-name";
 	public static final String UNDISGUISE_PVP_PATH = "undisguise.pvp";
 	public static final String UNDISGUISE_PVE_PATH = "undisguise.pve";
 	public static final String UNDISGUISE_PROJECTILE_PATH = "undisguise.projectile";
@@ -22,6 +23,7 @@ public class Configuration {
 	public boolean DISABLE_ITEM_PICK_UP = false;
 	public boolean DISABLE_MOB_DAMAGE = false;
 	public boolean DISABLE_MOB_TARGET = false;
+	public boolean MODIFY_DISPLAY_NAME = false;
 	public boolean UNDISGUISE_PVP = false;
 	public boolean UNDISGUISE_PVE = false;
 	public boolean UNDISGUISE_PROJECTILE = false;

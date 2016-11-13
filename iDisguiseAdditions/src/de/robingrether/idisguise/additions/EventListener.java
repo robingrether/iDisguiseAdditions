@@ -1,6 +1,5 @@
 package de.robingrether.idisguise.additions;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -11,6 +10,9 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
+import de.robingrether.idisguise.api.DisguiseEvent;
+import de.robingrether.idisguise.api.UndisguiseEvent;
+import de.robingrether.idisguise.disguise.PlayerDisguise;
 import de.robingrether.idisguise.management.DisguiseManager;
 
 public class EventListener implements Listener {
@@ -40,11 +42,11 @@ public class EventListener implements Listener {
 			if(plugin.getConfiguration().UNDISGUISE_PVP) {
 				if(DisguiseManager.getInstance().isDisguised((Player)damagee)) {
 					DisguiseManager.getInstance().undisguise((Player)damagee);
-					((Player)damagee).sendMessage(ChatColor.GOLD + "You were undisguised because PvP is not allowed while you are disguised.");
+					((Player)damagee).sendMessage(plugin.getLanguage().UNDISGUISE_PVP);
 				}
 				if(DisguiseManager.getInstance().isDisguised((Player)damager)) {
 					DisguiseManager.getInstance().undisguise((Player)damager);
-					((Player)damager).sendMessage(ChatColor.GOLD + "You were undisguised because PvP is not allowed while you are disguised.");
+					((Player)damager).sendMessage(plugin.getLanguage().UNDISGUISE_PVP);
 				}
 			}
 		} else if(damagee instanceof Player) {
@@ -54,11 +56,11 @@ public class EventListener implements Listener {
 				} else {
 					if(plugin.getConfiguration().UNDISGUISE_PVE) {
 						DisguiseManager.getInstance().undisguise((Player)damagee);
-						((Player)damagee).sendMessage(ChatColor.GOLD + "You were undisguised because PvE is not allowed while you are disguised.");
+						((Player)damagee).sendMessage(plugin.getLanguage().UNDISGUISE_PVE);
 					}
 					if(plugin.getConfiguration().UNDISGUISE_PROJECTILE && damager instanceof Projectile) {
 						DisguiseManager.getInstance().undisguise((Player)damagee);
-						((Player)damagee).sendMessage(ChatColor.GOLD + "You were undisguised because you were hit by a projectile.");
+						((Player)damagee).sendMessage(plugin.getLanguage().UNDISGUISE_PROJECTILE);
 					}
 				}
 			}
@@ -66,7 +68,7 @@ public class EventListener implements Listener {
 			if(plugin.getConfiguration().UNDISGUISE_PVE) {
 				if(DisguiseManager.getInstance().isDisguised((Player)damager)) {
 					DisguiseManager.getInstance().undisguise((Player)damager);
-					((Player)damager).sendMessage(ChatColor.GOLD + "You were undisguised because PvE is not allowed while you are disguised.");
+					((Player)damager).sendMessage(plugin.getLanguage().UNDISGUISE_PVE);
 				}
 			}
 		}
@@ -76,6 +78,20 @@ public class EventListener implements Listener {
 	public void onPlayerPickupItem(PlayerPickupItemEvent event) {
 		if(plugin.getConfiguration().DISABLE_ITEM_PICK_UP && DisguiseManager.getInstance().isDisguised(event.getPlayer())) {
 			event.setCancelled(true);
+		}
+	}
+	
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+	public void onDisguise(DisguiseEvent event) {
+		if(plugin.getConfiguration().MODIFY_DISPLAY_NAME && event.getDisguise() instanceof PlayerDisguise) {
+			event.getPlayer().setDisplayName(((PlayerDisguise)event.getDisguise()).getDisplayName());
+		}
+	}
+	
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+	public void onUndisguise(UndisguiseEvent event) {	
+		if(plugin.getConfiguration().MODIFY_DISPLAY_NAME && event.getDisguise() instanceof PlayerDisguise) {
+			event.getPlayer().setDisplayName(event.getPlayer().getName());
 		}
 	}
 	

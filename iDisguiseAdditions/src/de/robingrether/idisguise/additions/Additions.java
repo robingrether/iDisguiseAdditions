@@ -15,6 +15,7 @@ public class Additions extends JavaPlugin {
 	
 	private EventListener listener;
 	private Configuration configuration;
+	private Language language;
 	private Metrics metrics;
 	
 	public void onEnable() {
@@ -23,6 +24,9 @@ public class Additions extends JavaPlugin {
 		configuration = new Configuration(this);
 		configuration.loadData();
 		configuration.saveData();
+		language = new Language(this);
+		language.loadData();
+		language.saveData();
 		try {
 			metrics = new Metrics(this);
 			metrics.start();
@@ -38,6 +42,9 @@ public class Additions extends JavaPlugin {
 	
 	public void onReload() {
 		configuration.loadData();
+		configuration.saveData();
+		language.loadData();
+		language.saveData();
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -68,6 +75,10 @@ public class Additions extends JavaPlugin {
 	
 	public Configuration getConfiguration() {
 		return configuration;
+	}
+	
+	public Language getLanguage() {
+		return language;
 	}
 	
 }
