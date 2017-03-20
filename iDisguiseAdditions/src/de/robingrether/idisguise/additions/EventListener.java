@@ -41,11 +41,11 @@ public class EventListener implements Listener {
 		Entity damager = event.getDamager();
 		if(damagee instanceof Player && damager instanceof Player) {
 			if(plugin.getConfiguration().UNDISGUISE_PVP) {
-				if(DisguiseManager.getInstance().isDisguised((Player)damagee)) {
+				if(DisguiseManager.getInstance().isDisguisedTo((Player)damagee, (Player)damager)) {
 					DisguiseManager.getInstance().undisguise((Player)damagee);
 					((Player)damagee).sendMessage(plugin.getLanguage().UNDISGUISE_PVP);
 				}
-				if(DisguiseManager.getInstance().isDisguised((Player)damager)) {
+				if(DisguiseManager.getInstance().isDisguisedTo((Player)damager, (Player)damagee)) {
 					DisguiseManager.getInstance().undisguise((Player)damager);
 					((Player)damager).sendMessage(plugin.getLanguage().UNDISGUISE_PVP);
 				}
