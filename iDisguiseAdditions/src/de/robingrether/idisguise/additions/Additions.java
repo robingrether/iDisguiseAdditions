@@ -9,7 +9,7 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.robingrether.idisguise.io.Metrics;
+import de.robingrether.idisguise.io.bstats.Metrics;
 
 public class Additions extends JavaPlugin {
 	
@@ -27,11 +27,7 @@ public class Additions extends JavaPlugin {
 		language = new Language(this);
 		language.loadData();
 		language.saveData();
-		try {
-			metrics = new Metrics(this);
-			metrics.start();
-		} catch(Exception e) {
-		}
+		metrics = new Metrics(this);
 		getServer().getPluginManager().registerEvents(listener, this);
 		getLogger().log(Level.INFO, String.format("%s enabled!", getFullName()));
 	}
