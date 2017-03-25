@@ -9,7 +9,7 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.robingrether.idisguise.io.bstats.Metrics;
+import org.bstats.Metrics;
 
 public class Additions extends JavaPlugin {
 	
