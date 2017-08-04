@@ -1,9 +1,9 @@
 name: iDisguiseAdditions
 main: de.robingrether.idisguise.additions.Additions
-version: 1.2
+version: ${project.version}
 author: RobinGrether
 depend: [iDisguise]
-website: http://dev.bukkit.org/bukkit-plugins/idisguise-additions/
+website: https://dev.bukkit.org/projects/idisguise-additions
 commands:
    idisguiseadditions:
       description: Reload the config file.
