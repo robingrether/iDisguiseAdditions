@@ -7,20 +7,23 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import de.robingrether.idisguise.management.VersionHelper;
 
 import org.bstats.Metrics;
 
 public class Additions extends JavaPlugin {
 	
-	private EventListener listener;
+	private Listener listener;
 	private Configuration configuration;
 	private Language language;
 	private Metrics metrics;
 	
 	public void onEnable() {
 		checkDirectory();
-		listener = new EventListener(this);
+		listener = VersionHelper.require1_12() ? new EventListener(this) : new EventListenerLegacy(this);
 		configuration = new Configuration(this);
 		configuration.loadData();
 		configuration.saveData();
@@ -33,7 +36,7 @@ public class Additions extends JavaPlugin {
 	}
 	
 	public void onDisable() {
-		getLogger().log(Level.INFO, String.format("%s disabled!", getFullName()));;
+		getLogger().log(Level.INFO, String.format("%s disabled!", getFullName()));
 	}
 	
 	public void onReload() {
