@@ -12,7 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import de.robingrether.idisguise.management.VersionHelper;
 
-import org.bstats.Metrics;
+import org.bstats.bukkit.Metrics;
 
 public class Additions extends JavaPlugin {
 	
